@@ -16,13 +16,8 @@
 #include <openssl/ssl.h>
 #endif
 
-#include <errno.h>
 #include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
-#include <syslog.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -73,16 +68,18 @@ struct connection{
 		struct sockaddr_in	ipv4;
 		struct sockaddr_in6	ipv6;
 	} addr;
-	void		ws;
+	void		*ws;
 	int		fd;
+	char		host[64];
 };
 
-int server_bind(unsigned int, enum IP_TYPE
+int server_bind(struct connection *, unsigned int, enum IP_TYPE, enum PROTO
 #ifndef NO_TLS
 		, enum TLS_TYPE
 #endif
 		);
 
+struct connection client_accept(const struct connection *);
 #ifdef __cplusplus
 }
 #endif
