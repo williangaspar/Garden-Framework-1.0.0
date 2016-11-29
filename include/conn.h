@@ -54,6 +54,11 @@ enum TLS_TYPE{
 };
 #endif
 
+enum IP_TYPE{
+	IPV4,
+	IPV6
+};
+
 struct connection{
 	u_int8_t	type;
 	u_int8_t	state;
@@ -72,7 +77,7 @@ struct connection{
 	int		fd;
 };
 
-int server_bind(unsigned int
+int server_bind(unsigned int, enum IP_TYPE
 #ifndef NO_TLS
 		, enum TLS_TYPE
 #endif

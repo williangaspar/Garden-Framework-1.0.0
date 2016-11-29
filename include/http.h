@@ -144,7 +144,7 @@ struct http_response{
 	int (*send_file)(struct http_request *, FILE *);
 };
 
-void http_request_new(struct http_request *, int);
+void http_request_new(struct http_request *, struct connection);
 void http_request_header(struct http_request *req);
 void http_request_free(struct http_request *);
 
